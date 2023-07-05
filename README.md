@@ -6,7 +6,7 @@
 - [x] File size
 - [x] Width
 - [x] Height
-- [x] BitDepth
+- [ ] BitDepth
 - [ ] NewSubFileType
 - [ ] BitsPerSample
 - [ ] SamplePrePixel

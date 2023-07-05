@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 from typing import Optional
+import io
 
 class LoadImageFromFile():
     """Load an image from file.
@@ -39,6 +40,13 @@ class LoadImageFromFile():
             img_path = self.img_path
             # TODO the png of channel is 4, , cv2.IMREAD_UNCHANGED分情况是否有必要, tiff的数值范围会有影响
             # img = cv2.imread(img_path, cv2.IMREAD_UNCHANGED)
+            
+            with open(img_path, 'rb') as f:
+                img_buff = f.read()
+            img_b = io.BytesIO(img_buff).read()
+            bit_size = len(img_b)
+
+
             img = cv2.imread(img_path)
             
             # cv2.imshow('img', img)
@@ -64,6 +72,12 @@ class LoadImageFromFile():
         results['dtype'] = img.dtype
         results['ndim'] = img.ndim
         results['nbytes'] = img.nbytes
+        results['BitDepth'] = str(results['dtype'])[-1]
+
+        results['element_size'] = img.size
+        results['itemsize'] = img.itemsize
+
+        results['FileSize'] = bit_size
 
 
 
