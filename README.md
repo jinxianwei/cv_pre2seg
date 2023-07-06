@@ -18,8 +18,8 @@
 - [ ] Orientation
 - [ ] FillOrder
 - [ ] GrayResponseunit
-- [ ] MaxSamplevalue
-- [ ] MinSamplevalue
+- [x] MaxSamplevalue
+- [x] MinSamplevalue
 - [ ] Thresholding
 - [ ] Offset
 
@@ -29,7 +29,7 @@
 - [ ]      Blank
 - [ ] Threshold Basic Threshold
 - [x]           Range Threshold
-- [ ]           Adaptive Threshold
+- [x]           Adaptive Threshold
 - [ ]           E-M Threshold
 - [ ] Edges Watershed
 - [ ]       Find Edges

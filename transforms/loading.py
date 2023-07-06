@@ -4,7 +4,11 @@ from PIL import Image
 from typing import Optional, Dict
 import io
 import tifffile
-import gdal
+
+def show(name: str, img: np.ndarray) -> None:
+    cv2.imshow(name, img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 MODEL_PALETTE = {
     '1': 1,
@@ -113,6 +117,7 @@ class LoadImageFromFile():
 
         mode = img_pil.mode
         results['BitDepth'] = MODEL_PALETTE[mode]
+        results['mode'] = img_pil.mode
 
         
 
@@ -127,17 +132,19 @@ class LoadImageFromFile():
         Args:
 
         """
-        img = cv2.imread(img_path, cv2.IMREAD_UNCHANGED)
+        img = cv2.imread(img_path, 0) # 从图像的效果上看，没有太大差异
+        # img = cv2.imread(img_path, cv2.IMREAD_UNCHANGED)
         
         if self.to_float32:
             img = img.astype(np.float32)
 
-        # results['img'] = img
+        results['img'] = img
         results['img_size'] = img.shape[:2]
         results['height'] = img.shape[0]
         results['width'] = img.shape[1]
         # TODO the channel depend on the flag and cv2.imread args
-        # results['channel'] = img.shape[2]
+        # if len(img.shape)>2:
+        #     results['channel'] = img.shape[2]
         # results['size'] = img.size
         # results['dtype'] = img.dtype
         # results['ndim'] = img.ndim
@@ -146,8 +153,9 @@ class LoadImageFromFile():
         # results['element_size'] = img.size
         # results['itemsize'] = img.itemsize
 
-        # cv2.imshow('img', img)
-        # cv2.waitKey(0)
-        # cv2.destroyAllWindows()
+        show('ori', img)
         results['tail'] = img_path.strip().split('.')[-1]
+
+        results['MaxSampleValue'] = img.max()
+        results['MinSampleValue'] = img.min()
         return results

@@ -5,6 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "ubuntu_main.py",
+            "type": "python",
+            "request": "launch",
+            "program": "/mnt/e/cv_pre2seg/main.py",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
             "name": "main.py",
             "type": "python",
             "request": "launch",

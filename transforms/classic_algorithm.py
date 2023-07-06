@@ -1,6 +1,13 @@
 import cv2
 from typing import Optional, Dict
 from matplotlib import pyplot as plt
+import numpy as np
+
+def show(name: str, img: np.ndarray) -> None:
+    cv2.imshow(name, img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
 
 class Classic_ThresholdAlgorithm():
     """ classic threshold algorithm of segmentation
@@ -12,17 +19,13 @@ class Classic_ThresholdAlgorithm():
     def adaptiveThreshold(self):
         img = self.img_info['img']
         
-        th2 = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
-        th3 = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+        th1 = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
+        th2 = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
 
-        # cv2.imshow('img2', th2)
-        # cv2.waitKey(0)
-        # cv2.destroyAllWindows()
-        # cv2.imshow('img3', th3)
-        # cv2.waitKey(0)
-        # cv2.destroyAllWindows()
-
-        return th2     
+        show('adaptiveThreshold', th1)
+        show('adaptiveThreshold', th2)
+        self.img_info['adaptiveThreshold'] = th2
+        return th2
         # raise NotImplementedError
     
     def emThreshold():
@@ -36,14 +39,13 @@ class Classic_ThresholdAlgorithm():
         
         ret, th1 = cv2.threshold(img, minimun_value, maximum_value, cv2.THRESH_BINARY)  
 
-        # cv2.imshow('img', th1)
-        # cv2.waitKey(0)
-        # cv2.destroyAllWindows()
-
+        show('rangeThreshold', img)
+        self.img_info['rangeThreshold'] = th1
         return th1
         # raise NotImplementedError
     
-    def basicThreshold():
+    def basicThreshold(self,
+                       ):
 
         raise NotImplementedError
     
