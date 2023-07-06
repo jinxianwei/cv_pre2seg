@@ -1,4 +1,4 @@
-from transforms import LoadImageFromFile
+from transforms import LoadImageFromFile, Classic_ThresholdAlgorithm
 
 
 def main():
@@ -16,6 +16,10 @@ def main():
         LoadImage = LoadImageFromFile(img_path)
         result = LoadImage.transform(result)
         print(result)
+
+        # threshold_al = Classic_ThresholdAlgorithm(result)
+        # # threshold_al.adaptiveThreshold()
+        # threshold_al.rangeThreshold(91, 208)
 
     return 0
 

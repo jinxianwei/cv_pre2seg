@@ -3,6 +3,8 @@ import cv2
 from PIL import Image
 from typing import Optional, Dict
 import io
+import tifffile
+import gdal
 
 MODEL_PALETTE = {
     '1': 1,
@@ -12,7 +14,8 @@ MODEL_PALETTE = {
     'RGBA': 32,
     'CMYK': 32, 
     'YCbCr': 24,
-    'I': 32,
+    'I;16': 16,
+    'I;32':32,
     'F': 32
 }
 
@@ -54,6 +57,11 @@ class LoadImageFromFile():
             results = self.get_bitdepth(img_path, results)
             results = self.get_imginfor(img_path, results)
 
+            if results['tail'] == 'tif':
+                img_tif = tifffile.imread(img_path)
+                img_tif
+
+
         except Exception as e:
             if self.ignore_empty:
                 return None
@@ -87,13 +95,26 @@ class LoadImageFromFile():
 
         """
         img_pil = Image.open(img_path)
-        temp = img_pil.getbands()
-        model = ''
-        for i in range(len(temp)):
-            model += temp[i]
-        # TODO 异常
-        bitdepth = MODEL_PALETTE[model]
-        results['BitDepth'] = bitdepth
+        # temp = img_pil.getbands()
+        # model = ''
+        # for i in range(len(temp)):
+        #     model += temp[i]
+        # # TODO 异常
+        # bitdepth = MODEL_PALETTE[model]
+        # results['BitDepth'] = bitdepth
+
+        img_info = img_pil.info
+        if 'gamma' in img_info:
+            results['Gamma'] = img_info['gamma']
+
+        if 'dpi' in img_info:
+            results['dpi'] = img_info['dpi']
+
+
+        mode = img_pil.mode
+        results['BitDepth'] = MODEL_PALETTE[mode]
+
+        
 
         return results
     
@@ -128,4 +149,5 @@ class LoadImageFromFile():
         # cv2.imshow('img', img)
         # cv2.waitKey(0)
         # cv2.destroyAllWindows()
+        results['tail'] = img_path.strip().split('.')[-1]
         return results

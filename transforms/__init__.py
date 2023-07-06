@@ -1,4 +1,5 @@
 from .loading import LoadImageFromFile
+from .classic_algorithm import Classic_ThresholdAlgorithm
 
-all = ['LoadImageFromFile',
+all = ['LoadImageFromFile', 'Classic_ThresholdAlgorithm'
        ]

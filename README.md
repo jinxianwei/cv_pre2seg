@@ -12,7 +12,7 @@
 - [ ] SamplePrePixel
 - [ ] RowsPerStrip
 - [ ] XResolution
-- [ ] YrRsolution
+- [ ] YRsolution
 - [ ] TileWidth
 - [ ] TileLength
 - [ ] Orientation
@@ -28,7 +28,7 @@
 - [ ] Base Invert
 - [ ]      Blank
 - [ ] Threshold Basic Threshold
-- [ ]           Range Threshold
+- [x]           Range Threshold
 - [ ]           Adaptive Threshold
 - [ ]           E-M Threshold
 - [ ] Edges Watershed
@@ -38,7 +38,7 @@
 - [ ]       Advanced FindText
 - [ ]                Find Facial Features
 - [ ] SNAP Auto Segmentation
-- [ ] Extrema Find global Maximum 
+- [ ] Extrema Find global Maximum
 - [ ]         Find global Minimum
 - [ ]         Find Local Maxima
 - [ ]         Find Local Minima
