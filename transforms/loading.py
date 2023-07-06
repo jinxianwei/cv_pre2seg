@@ -48,53 +48,17 @@ class LoadImageFromFile():
         Returns:
             dict: The dict contains loaded image and meta information.
         """
-
+        img_path = self.img_path
         try:
-            img_path = self.img_path
-
-            
-
-            img_pil = Image.open(img_path)
-            temp = img_pil.getbands()
-            model = ''
-            for i in range(len(temp)):
-                model += temp[i]
-            # TODO 异常
-            bitdepth = MODEL_PALETTE[model]
-            results['BitDepth'] = bitdepth
-
-
-
-            img = cv2.imread(img_path, cv2.IMREAD_UNCHANGED)
-            
-            # cv2.imshow('img', img)
-            # cv2.waitKey(0)
-            # cv2.destroyAllWindows()
+            results = self.get_filesize(img_path, results)
+            results = self.get_bitdepth(img_path, results)
+            results = self.get_imginfor(img_path, results)
 
         except Exception as e:
             if self.ignore_empty:
                 return None
             else:
                 raise e
-
-        if self.to_float32:
-            img = img.astype(np.float32)
-
-        # results['img'] = img
-        results['img_shape'] = img.shape[:2]
-        results['height'] = img.shape[0]
-        results['width'] = img.shape[1]
-        # TODO the channel depend on the flag and cv2.imread args
-        # results['channel'] = img.shape[2]
-        results['size'] = img.size
-        results['dtype'] = img.dtype
-        results['ndim'] = img.ndim
-        results['nbytes'] = img.nbytes
-
-        results['element_size'] = img.size
-        results['itemsize'] = img.itemsize
-
-        
 
         return results
 
@@ -111,4 +75,57 @@ class LoadImageFromFile():
         bit_size = len(img_b)
         results['FileSize'] = bit_size
 
+        return results
+    
+    def get_bitdepth(self, 
+                     img_path: str,
+                     results: dict) -> Optional[dict]:
+        """
+        get img bitdepth
+
+        Args:
+
+        """
+        img_pil = Image.open(img_path)
+        temp = img_pil.getbands()
+        model = ''
+        for i in range(len(temp)):
+            model += temp[i]
+        # TODO 异常
+        bitdepth = MODEL_PALETTE[model]
+        results['BitDepth'] = bitdepth
+
+        return results
+    
+    def get_imginfor(self, 
+                     img_path: str,
+                     results: dict) -> Optional[dict]:
+        """
+        get img infor such as h, w, c, and ndarray data
+
+        Args:
+
+        """
+        img = cv2.imread(img_path, cv2.IMREAD_UNCHANGED)
+        
+        if self.to_float32:
+            img = img.astype(np.float32)
+
+        # results['img'] = img
+        results['img_size'] = img.shape[:2]
+        results['height'] = img.shape[0]
+        results['width'] = img.shape[1]
+        # TODO the channel depend on the flag and cv2.imread args
+        # results['channel'] = img.shape[2]
+        # results['size'] = img.size
+        # results['dtype'] = img.dtype
+        # results['ndim'] = img.ndim
+        # results['nbytes'] = img.nbytes
+
+        # results['element_size'] = img.size
+        # results['itemsize'] = img.itemsize
+
+        # cv2.imshow('img', img)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
         return results
