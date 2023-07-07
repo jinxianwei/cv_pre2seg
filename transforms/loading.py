@@ -62,8 +62,8 @@ class LoadImageFromFile():
             results = self.get_imginfor(img_path, results)
 
             if results['tail'] == 'tif':
-                img_tif = tifffile.imread(img_path)
-                img_tif
+                self.get_tifinfo(img_path, results)
+                print(results)
 
 
         except Exception as e:
@@ -132,12 +132,13 @@ class LoadImageFromFile():
         Args:
 
         """
-        img = cv2.imread(img_path, 0) # 从图像的效果上看，没有太大差异
-        # img = cv2.imread(img_path, cv2.IMREAD_UNCHANGED)
+        # img = cv2.imread(img_path, 0) # 从图像的效果上看，没有太大差异
+        img = cv2.imread(img_path, cv2.IMREAD_UNCHANGED)
         
         if self.to_float32:
             img = img.astype(np.float32)
 
+        results['path'] = img_path
         results['img'] = img
         results['img_size'] = img.shape[:2]
         results['height'] = img.shape[0]
@@ -153,9 +154,31 @@ class LoadImageFromFile():
         # results['element_size'] = img.size
         # results['itemsize'] = img.itemsize
 
-        show('ori', img)
+        # show('ori', img)
         results['tail'] = img_path.strip().split('.')[-1]
 
         results['MaxSampleValue'] = img.max()
         results['MinSampleValue'] = img.min()
         return results
+
+    def get_tifinfo(self,
+                    img_path: str,
+                    results: dict) -> Optional[Dict]:
+        with tifffile.TiffFile(img_path) as tiff:
+            tile_length = tiff.pages[0].tilelength
+            results['offset'] = tiff.pages[0].offset
+            results['RowsPerStrip'] = tiff.pages[0].rowsperstrip
+            results['SamplesPerPixel'] = tiff.pages[0].samplesperpixel
+            results['BitsPerSample'] = tiff.pages[0].bitspersample
+            results['NewSubFileType'] = tiff.pages[0].subfiletype
+            results['FillOrder'] = tiff.pages[0].fillorder
+            results['StripByteCounts'] = tiff.pages[0].databytecounts
+            results['StripOffsets'] = tiff.pages[0].dataoffsets
+            results['TileWidth'] = tiff.pages[0].tilewidth
+            results['TileLength'] = tiff.pages[0].tilelength
+
+            # print('the tilelength is {}'.format(tile_length))
+            # print('the offset is {}'.format(tiff.pages[0].offset))
+            # print('the rowsperstrip is {}'.format(tiff.pages[0].rowsperstrip))
+            # print('the bitspersample is {}'.format(tiff.pages[0].bitspersample))
+            cv2.Scharr

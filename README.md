@@ -7,39 +7,39 @@
 - [x] Width
 - [x] Height
 - [x] BitDepth
-- [ ] NewSubFileType
-- [ ] BitsPerSample
-- [ ] SamplePrePixel
-- [ ] RowsPerStrip
-- [ ] XResolution
-- [ ] YRsolution
-- [ ] TileWidth
-- [ ] TileLength
-- [ ] Orientation
-- [ ] FillOrder
-- [ ] GrayResponseunit
 - [x] MaxSamplevalue
 - [x] MinSamplevalue
+- [o] NewSubFileType
+- [o] BitsPerSample
+- [o] SamplePrePixel
+- [o] RowsPerStrip
+- [ ] XResolution
+- [ ] YRsolution
+- [o] TileWidth
+- [o] TileLength
+- [ ] Orientation
+- [o] FillOrder
+- [ ] GrayResponseunit
 - [ ] Thresholding
-- [ ] Offset
+- [o] Offset
 
 ## Some segmentation using Classic algorithm
 
-- [ ] Base Invert
-- [ ]      Blank
-- [ ] Threshold Basic Threshold
+- [x] Base Invert
+- [x]      Blank  貌似需要为其他算法提供图层功能
+- [x] Threshold Basic Threshold (%的方式未复现)
 - [x]           Range Threshold
 - [x]           Adaptive Threshold
 - [ ]           E-M Threshold
-- [ ] Edges Watershed
-- [ ]       Find Edges
-- [ ]       Find Circles
-- [ ]       Find Lines
+- [x] Edges Watershed  待优化
+- [o]       Find Edges 除了canny的laplacian和sobel边缘都有非边缘图像，是否需要进行二值化
+- [x]       Find Circles
+- [x]       Find Lines
 - [ ]       Advanced FindText
 - [ ]                Find Facial Features
 - [ ] SNAP Auto Segmentation
-- [ ] Extrema Find global Maximum
-- [ ]         Find global Minimum
-- [ ]         Find Local Maxima
+- [x] Extrema Find global Maximum
+- [x]         Find global Minimum
+- [ ]         Find Local Maxima  貌似有模糊的操作
 - [ ]         Find Local Minima
 - [ ] Other Machine Learning model
