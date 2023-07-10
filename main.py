@@ -9,6 +9,8 @@ def main():
             'E:\\cv_pre2seg\\source\\4.png',
             'E:\\cv_pre2seg\\source\\5.tif',
         'E:\\cv_pre2seg\\source\\moeda.png',
+        'E:\\cv_pre2seg\\source\\ocr.jpg',
+        'E:\\cv_pre2seg\\source\\facial2.jpg'
             ]
     # path_set = ['/mnt/e/cv_pre2seg/source/1_8bit.jpg',
     #             '/mnt/e/cv_pre2seg/source/2.jpg',
@@ -26,16 +28,18 @@ def main():
         
 
         # threshold_al = Classic_ThresholdAlgorithm(result)
-
+        # threshold_al.emThreshold()
         # threshold_al.adaptiveThreshold()
         # threshold_al.rangeThreshold(91, 208)
         # threshold_al.basicThreshold(125)
 
         classic_edge = Classic_Edges(result)
+        # classic_edge.Advanced_FindText()
+        classic_edge.Advanced_FindFacialFeatures()
         # classic_edge.Find_Edges('Canny')
         # classic_edge.Find_Edges('Sobel')
         # classic_edge.Find_Edges('Laplacian')
-        classic_edge.Find_Lines()
+        # classic_edge.Find_Lines()
         # classic_edge.Watershed()
         # classic_edge.Find_Circles()
 

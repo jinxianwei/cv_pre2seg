@@ -35,8 +35,8 @@
 - [o]       Find Edges 除了canny的laplacian和sobel边缘都有非边缘图像，是否需要进行二值化
 - [x]       Find Circles
 - [x]       Find Lines
-- [ ]       Advanced FindText
-- [ ]                Find Facial Features
+- [x]       Advanced FindText  尝试以deepLearning进行inference
+- [x]                Find Facial Features
 - [ ] SNAP Auto Segmentation
 - [x] Extrema Find global Maximum
 - [x]         Find global Minimum

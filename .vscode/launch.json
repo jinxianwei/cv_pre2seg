@@ -4,12 +4,19 @@
     // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
-            "name": "find_circle",
+            "name": "ocr3",
             "type": "python",
             "request": "launch",
-            "program": "E:\\cv_pre2seg\\demo_findcircle.py",
+            "program": "E:\\cv_pre2seg\\reference\\demo_ocr3.py",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "ocr_demo",
+            "type": "python",
+            "request": "launch",
+            "program": "E:\\cv_pre2seg\\reference\\demo_ocr.py",
             "console": "integratedTerminal",
             "justMyCode": false
         },
